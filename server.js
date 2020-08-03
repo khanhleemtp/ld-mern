@@ -5,8 +5,8 @@ const path = require('path');
 const config = require('config');
 
 const questionsRoute = require('./routes/api/questions');
-const usersRoute = require('./routes/api/users');
-const authRoute = require('./routes/api/auth');
+// const usersRoute = require('./routes/api/users');
+// const authRoute = require('./routes/api/auth');
 
 const app = express();
 
@@ -28,8 +28,8 @@ mongoose.connect(process.env.mongoURI || db, { useNewUrlParser: true, useUnified
 
 // Use Routes
 app.use('/api/questions', questionsRoute);
-app.use('/api/users', usersRoute);
-app.use('/api/auth', authRoute);
+// app.use('/api/users', usersRoute);
+// app.use('/api/auth', authRoute);
 
 // Serve static assets if in production
 // step-3

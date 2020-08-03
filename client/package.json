@@ -23,7 +23,6 @@
     "eject": "react-scripts eject",
     "build-css": "tailwindcss build src/stylesTailWind.css -o src/styles.css"
   },
-  "proxy": "http://localhost:5000",
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -38,5 +37,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:8080"
 }

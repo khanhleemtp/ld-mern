@@ -9,6 +9,8 @@ const questionsRoute = require('./routes/api/questions');
 // const authRoute = require('./routes/api/auth');
 
 const app = express();
+// Step-1-
+const PORT = process.env.PORT || 8080; //6656
 
 // body parser Middleware
 // app.use(bodyParser.json());
@@ -42,7 +44,6 @@ if(process.env.NODE_ENV === 'production') {
     })
 }
 
-// Step-1-
-const port = process.env.PORT || 5000; //6656
 
-app.listen(port, ()=> console.log(`Server started on ${port}`));
+
+app.listen(PORT, ()=> console.log(`Server started on ${PORT}`));

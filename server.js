@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 // app.use(express.json());
 
 // DB config
-const db = config.require('./config/keys').mongoURI;
+const db = config.get('mongoURI');
 
 // connect db
 mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })

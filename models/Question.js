@@ -3,20 +3,9 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 const questionSchema = new Schema({
-    category: {
-        type: String
-    },
-    difficulty: {
-        type: String
-    },
-    question: {
-        type: String
-    },
-    correct_answer: {
-        type: String
-    },
-    incorrect_answers: {
-        type: [String]
+    name: {
+        type: String,
+        required: true
     },
     date: {
         type: Date,

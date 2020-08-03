@@ -1,30 +1,30 @@
 const express = require('express');
 
 const router = express.Router();
+const auth = require('../../middleware/auth');
 
 // Question Model
 
 const Question = require('../../models/Question');
 
-// @routes
-// @desc GET All Items
+// @route GET api/questions
+// @desc GET All Questions
 // @access Public
 
 router.get('/', (req, res) => {
     Question.find()
+        .sort({ date: -1 })
         .then(ques => res.json(ques))
         .catch(err => console.log(err)); 
 });
 
+// @route POST api/questions
+// @desc Create An Questions
+// @access Private
+
 router.post('/', (req, res) => {
     const newQuestion = new Question({
-        question: req.body.question,
-        category: req.body.category,
-        question: req.body.question,
-        difficulty: req.body.difficulty,
-        correct_answer: req.body.correct_answer,
-        incorrect_answers: req.body.incorrect_answers,
-        date: req.body.date,
+        name: req.body.name
     });
     newQuestion.save().then(ques => res.json(ques));
 })

@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "predev":"fuser -k 8080/tcp && echo 'Terminated' || echo 'Nothing was running on the PORT'",
+    "prevdev":"fuser -k 5000/tcp && echo 'Terminated' || echo 'Nothing was running on the PORT'",
     "build": "cd client && npm run build",
     "install-client": "cd client && npm install",
     "heroku-postbuild": "npm run install-client && npm run build",

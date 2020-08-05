@@ -22,14 +22,14 @@ router.get('/', (req, res) => {
 // @desc Create An Questions
 // @access Private
 
-router.post('/', (req, res) => {
+router.post('/', auth, (req, res) => {
     const newQuestion = new Question({
         name: req.body.name
     });
     newQuestion.save().then(ques => res.json(ques));
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', auth, (req, res) => {
     const id = req.params.id;
     Question.findById(id)
             .then(item => {

@@ -34,6 +34,7 @@ app.use('/api/users', usersRoute);
 app.use('/api/auth', authRoute);
 
 // Serve static assets if in production
+
 // step-3
 if(process.env.NODE_ENV === 'production') {
     // Set static folder

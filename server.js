@@ -2,7 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
-const config = require('config');
+// const config = require('config');
+require('dotenv').config();
 
 const questionsRoute = require('./routes/api/questions');
 const usersRoute = require('./routes/api/users');
@@ -19,12 +20,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // DB config
-const db = config.get('mongoURI');
+// const db = config.get('mongoURI');
 
 
 // connect db
 // step-2
-mongoose.connect(process.env.MONGO_URI || db, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
     .then(() => console.log('Mongo db connected'))
     .catch(err => console.log(err));
 

@@ -1,10 +1,33 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 import { Link } from 'react-router-dom';
 import imgLogo from '../img/milk.svg';
 import imgToggle from '../img/toggle.svg';
+import RegisterModel from './auth/RegisterModel';
+import Logout from './auth/Logout';
+import LoginModal from './auth/LoginModal';
+import { connect } from 'react-redux';
 
-function AppNavbar() {
+
+function AppNavbar({ auth }) {
     const [open, setOpen] = useState(false);
+    const { isAuthenticated, user } = auth;
+
+    const authLink = (
+        <Fragment>
+                <span>
+                    <strong>{ user ? `Welcome ${user.name}` : ''}</strong>
+                </span>
+                <Logout />
+        </Fragment>
+    )
+
+    const guestLink = (
+        <Fragment>
+                <RegisterModel />
+                <LoginModal />
+        </Fragment>
+    )
+
 
     const toggle = () => {
         setOpen(!open);
@@ -22,19 +45,18 @@ function AppNavbar() {
                     </div>
                     </div>  
                 </header>
-                    {/* <ul className={open ? "transition-all duration-500  delay-150 ease-in-out text-white-100 ml-auto w-1/2 flex justify-between" : "transition-all duration-500 flex justify-between delay-150 ease-in-out w-1/2 -ml-64"}>
-                        <li>
-                                <Link to="/">Home</Link>
-                        </li>
-                        <li className="mx-2">
-                                <Link to="/">About</Link>
-                        </li>
-                        <li>
-                                <Link to="/">Contact</Link>
-                        </li>
-                    </ul>   */}
+                 {
+                     isAuthenticated ? authLink : guestLink
+                 }
+
             </nav>
     )
 }
 
-export default AppNavbar
+const mapStateToProps = (state) => {
+    return {
+        auth: state.auth
+    }
+}
+
+export default connect(mapStateToProps, null)(AppNavbar)

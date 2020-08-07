@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { getItems, deleteItems } from '../actions/itemActions';
 import PropTypes from 'prop-types';
 
-function AppMain({ deleteItems, getItems, item }) {
+function AppMain({ deleteItems, getItems, item, isAuthenticated }) {
     
     useEffect(() => {
         getItems();
-    }, [])
+    }, [isAuthenticated])
     
     return (
         <div>
@@ -15,13 +15,16 @@ function AppMain({ deleteItems, getItems, item }) {
                 {
                     item.items && item.items.length > 0 ? item.items.map((item) => (
                         <li className="border-b-2 p-2 flex justify-between" key={item._id}> 
-                            {item.name} 
-                            <button 
-                            className="rounded-full bg-red-500 text-red-100 p-2"
-                            onClick={() => {
-                                deleteItems(item._id);
-                            }}
-                            >Remove</button>
+                            {item.name}
+                            {   isAuthenticated ?
+                                <button 
+                                className="rounded-full bg-red-500 text-red-100 p-2"
+                                onClick={() => {
+                                    deleteItems(item._id);
+                                }}
+                                >Remove</button> : null
+                            } 
+
                         </li>
                     )) :
                     <div>Loading</div>
@@ -35,12 +38,14 @@ function AppMain({ deleteItems, getItems, item }) {
 AppMain.propTypes = {
     getItems: PropTypes.func.isRequired,
     item: PropTypes.object.isRequired,
-    deleteItems: PropTypes.func.isRequired
+    deleteItems: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired,
 }
 
 const mapStateToProps = state => {
     return {
-    item: state.item
+    item: state.item,
+    isAuthenticated: state.auth.isAuthenticated
     }
 }
 
